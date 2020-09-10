@@ -6,7 +6,7 @@
 /*   By: ztan <ztan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/26 14:08:14 by ztan          #+#    #+#                 */
-/*   Updated: 2020/09/10 21:33:21 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/11 00:29:38 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		detect_movement(t_data *data)
 	data->input.horizontal = (data->input.left > data->input.right) ? -1 : 1;
 	data->input.vertical =
 		(data->input.backward > data->input.forward) ? -1 : 1;
-	data->input.turn = (data->input.turn_left > data->input.turn) ? -1 : 1;
+	data->input.turn = (data->input.turn_left > data->input.turn_right) ? -1 : 1;
 	if ((data->input.left && data->input.right) ||
 	(!data->input.left && !data->input.right))
 		data->input.horizontal = 0;

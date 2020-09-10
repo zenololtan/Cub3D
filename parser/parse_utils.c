@@ -6,7 +6,7 @@
 /*   By: ztan <ztan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/29 19:27:20 by ztan          #+#    #+#                 */
-/*   Updated: 2020/09/09 14:54:17 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 16:53:21 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,4 @@ int		valid_line(char *line)
 	if (line[i] == '\0' || line[i] == '\n')
 		return (-1);
 	return (0);
-}
-
-int		valid_num(char *num)
-{
-	int		i;
-
-	i = 0;
-	if (!num)
-		return (0);
-	while (num[i] != '\0')
-	{
-		if (!ft_isdigit(num[i]))
-			return (0);
-		i++;
-	}
-	return (1);
 }

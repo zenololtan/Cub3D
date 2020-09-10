@@ -6,7 +6,7 @@
 /*   By: zenotan <zenotan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/06 13:30:05 by zenotan       #+#    #+#                 */
-/*   Updated: 2020/09/09 13:26:01 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 15:38:39 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,6 @@ void			flood_fill(t_data *data, int x, int y, char **map)
 	flood_fill(data, x + 1, y - 1, map);
 	flood_fill(data, x - 1, y + 1, map);
 	flood_fill(data, x - 1, y - 1, map);
-}
-
-void			check_spawn(t_data *data, char **map, int x, int y)
-{
-	if (map[y + 1][x] == '1' && map[y - 1][x] == '1' &&
-		map[y][x + 1] == '1' && map[y][x - 1] == '1')
-		errors("Spawn is built in", data);
 }
 
 void			check_map(t_data *data)

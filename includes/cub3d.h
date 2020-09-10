@@ -6,7 +6,7 @@
 /*   By: zenotan <zenotan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/14 18:00:29 by zenotan       #+#    #+#                 */
-/*   Updated: 2020/09/09 14:46:30 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 16:53:39 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,8 @@ typedef struct		s_data
 	t_input			input;
 	int				free;
 	int				multiple_sprites;
+	int				maxw;
+	int				maxh;
 }					t_data;
 
 void				file_check(int argv, char **argc, t_data *data);
@@ -208,7 +210,6 @@ void				join_map_lines(t_data *data, char *s2);
 char				*strjoiner(char **input);
 int					check_name(char *str);
 int					valid_line(char *line);
-int					valid_num(char *num);
 void				convert_tex(t_data *data);
 void				check_map(t_data *data);
 void				check_sprites(t_data *data);

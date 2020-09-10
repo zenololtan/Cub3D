@@ -6,7 +6,7 @@
 /*   By: zenotan <zenotan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/04 14:24:52 by zenotan       #+#    #+#                 */
-/*   Updated: 2020/09/07 20:12:31 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 17:29:22 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		valid_map_line(char *line)
 	int ret;
 
 	i = 0;
-	ret = 1;
+	ret = -1;
 	while (line[i] == ' ')
 		i++;
 	if (line[i] == '\0')
@@ -90,7 +90,7 @@ int		valid_map_line(char *line)
 			ret = 1;
 		i++;
 	}
-	return (-1);
+	return (ret);
 }
 
 void	get_lines(t_data *data, char *line, int fd)
@@ -102,17 +102,13 @@ void	get_lines(t_data *data, char *line, int fd)
 	{
 		ret = get_next_line(fd, &line);
 		if (!valid_map_line(line))
-		{
-			free(line);
 			errors("map contains invalid information", data);
-		}
 		if (valid_map_line(line) == 1 && data->map_check == 1)
-		{
-			free(line);
 			errors("Map contains spaces", data);
-		}
 		if (valid_map_line(line) == 2)
 			data->map_check = 1;
+		else
+			data->map_check = 0;
 		if (valid_map_line(line) != 2)
 			join_map_lines(data, line);
 		free(line);

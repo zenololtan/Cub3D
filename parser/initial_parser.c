@@ -6,7 +6,7 @@
 /*   By: zeno <zeno@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/05/24 18:03:23 by zeno          #+#    #+#                 */
-/*   Updated: 2020/09/09 14:47:03 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 17:14:55 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ void	check_data(t_data *data)
 
 void	set_max_res(t_data *data)
 {
-	int	sizex;
-	int	sizey;
-
 	if (data->bmp)
 	{
 		if (data->height > 16384)
@@ -55,11 +52,10 @@ void	set_max_res(t_data *data)
 			data->width = 16384;
 		return ;
 	}
-	mlx_get_screen_size(data->mlx, &sizex, &sizey);
-	if (data->width > sizex)
-		data->width = sizex;
-	if (data->height > sizey)
-		data->height = sizey;
+	if (data->width > data->maxw)
+		data->width = data->maxw;
+	if (data->height > data->maxh)
+		data->height = data->maxh;
 }
 
 void	parse_input_data(char *line, t_data *data)
@@ -119,6 +115,7 @@ void	file_check(int argv, char **argc, t_data *data)
 	int fd;
 
 	reset_data(data);
+	mlx_get_screen_size(data->mlx, &data->maxw, &data->maxh);
 	if (argv != 2 && argv != 3)
 		errors("Invalid amount of arguments", data);
 	if (argv == 3)

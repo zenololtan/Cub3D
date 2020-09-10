@@ -6,12 +6,30 @@
 /*   By: ztan <ztan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/29 19:29:21 by ztan          #+#    #+#                 */
-/*   Updated: 2020/08/24 17:25:02 by ztan          ########   odam.nl         */
+/*   Updated: 2020/09/10 17:14:40 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../lft/libft.h"
+
+int		valid_num(char *num)
+{
+	int		i;
+
+	i = 0;
+	if (!num)
+		return (0);
+	while (num[i] != '\0')
+	{
+		if (!ft_isdigit(num[i]))
+			return (0);
+		i++;
+	}
+	if (i >= 10)
+		return (-1);
+	return (1);
+}
 
 void	parse_res(char **input, t_data *data)
 {
@@ -23,6 +41,10 @@ void	parse_res(char **input, t_data *data)
 		errors("Invalid resolution", data);
 	data->width = ft_atoi(input[1]);
 	data->height = ft_atoi(input[2]);
+	if (valid_num(input[1]) == -1)
+		data->width = 4000;
+	if (valid_num(input[2]) == -1)
+		data->height = 4000;
 	if (data->width == 0 || data->height == 0)
 		errors("Invalid resolution", data);
 	data->res_check = 1;
@@ -86,8 +108,8 @@ void	parse_fc(char **input, t_data *data, int i)
 	color = line_checker(line, data);
 	if (!color)
 		errors("Failed to split color code", data);
-	if (!valid_num(color[0]) || !valid_num(color[1]) || !valid_num(color[2]) ||
-		color[3] != NULL)
+	if (!valid_num(color[0]) || !valid_num(color[1]) ||
+		!valid_num(color[2]) || color[3] != NULL)
 		errors("Invalid color code, ", data);
 	data->fc[i].r = ft_atoi(color[0]);
 	data->fc[i].g = ft_atoi(color[1]);

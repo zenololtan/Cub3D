@@ -6,7 +6,7 @@
 /*   By: zenotan <zenotan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/08 13:09:37 by zenotan       #+#    #+#                 */
-/*   Updated: 2020/09/10 19:14:13 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 20:17:48 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	draw_bmp(t_data *data)
 	int				y;
 	char			*pixel_addr;
 	unsigned int	pixel;
-	int				write_val;
 
 	y = data->height - 1;
 	while (y >= 0)

@@ -6,7 +6,7 @@
 #    By: zeno <zeno@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/05/16 14:29:42 by zeno          #+#    #+#                  #
-#    Updated: 2020/09/08 15:07:02 by zenotan       ########   odam.nl          #
+#    Updated: 2020/09/10 21:23:17 by zenotan       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,14 +31,25 @@ SRC = main.c \
 LIBS = lft/libft.a \
 	gnl/gnl.a
 OBJ = $(SRC:%.c=%.o)
-FLAGS = -Wall -Wextra -Werror -O3
+FLAGS = -Wall -Wextra -Werror 
 CC = gcc
 BMP = screenshot.bmp
-
-MLX_DIR = mlx_mac
-MLX_NAME = mlx
-EXTRA = -framework OpenGL -framework AppKit
+OS = $(shell uname)
 LEAKS = -fsanitize=address -g
+
+ifeq ($(OS),Linux)
+	MLX_DIR		=	mlxlinux
+	MLX_NAME	=	mlx_Linux
+	MLX_INCLUDE	=	mlxlinux
+	DEFINE		=	-D LINUX=1
+	EXTRA_FLAGS	=	-lz -lm -lX11 -lXext $(DEFINE)
+else
+	MLX_DIR		=	mlx_mac
+	MLX_NAME	=	mlx
+	MLX_INCLUDE	=	mlx
+	DEFINE		=	-D MACOS=1
+	EXTRA_FLAGS	=	-O3 -framework OpenGL -framework AppKit libmlx.dylib $(DEFINE)
+endif
 
 .PHONY: all clean fclean re
 
@@ -48,11 +59,13 @@ $(NAME): $(OBJ)
 	make -C $(MLX_DIR)
 	make -C lft/
 	make -C gnl/
-	cp $(MLX_DIR)/libmlx.dylib ./libmlx.dylib
-	$(CC) $(FLAGS) $(LIBS) $(EXTRA) -L$(MLX_DIR) -l$(MLX_NAME) -o $(NAME) $(OBJ)
+ifneq ($(OS),Linux)
+	cp $(MLX_DIR)/libmlx.dylib .
+endif
+	$(CC) -o $(NAME) $(LIBS) $(OBJ) -L$(MLX_DIR) -l$(MLX_NAME) $(EXTRA_FLAGS)
 
 %.o: %.c
-	$(CC) $(FLAGS) -I$(MLX_DIR) -c $< -o $@
+	$(CC) $(FLAGS) -I$(MLX_DIR) -c $< -o $@ $(DEFINE)
 
 clean:
 	$(RM) $(OBJ)

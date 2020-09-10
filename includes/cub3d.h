@@ -6,26 +6,44 @@
 /*   By: zenotan <zenotan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/14 18:00:29 by zenotan       #+#    #+#                 */
-/*   Updated: 2020/09/10 16:53:39 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 21:15:01 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-typedef	enum		e_defenitions
-{
-	KEYPRESS = 2,
-	KEYRELEASE = 3,
-	CLOSE = 17,
-	W = 13,
-	A = 0,
-	S = 1,
-	D = 2,
-	LEFT = 123,
-	RIGHT = 124,
-	ESC = 53,
-}					t_defenitions;
+# ifdef LINUX
+	typedef	enum		e_defenitions
+	{
+		KEYPRESS = 2,
+		KEYRELEASE = 3,
+		CLOSE = 17,
+		W = 119,
+		A = 97,
+		S = 115,
+		D = 100,
+		LEFT = 65361,
+		RIGHT = 65363,
+		ESC = 65307,
+	}					t_defenitions;
+# endif
+
+# ifdef MACOS
+	typedef	enum		e_defenitions
+	{
+		KEYPRESS = 2,
+		KEYRELEASE = 3,
+		CLOSE = 17,
+		W = 13,
+		A = 0,
+		S = 1,
+		D = 2,
+		LEFT = 123,
+		RIGHT = 124,
+		ESC = 53,
+	}					t_defenitions;
+# endif
 
 typedef	struct		s_u_color
 {

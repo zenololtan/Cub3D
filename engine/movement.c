@@ -6,7 +6,7 @@
 /*   By: ztan <ztan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/26 14:08:14 by ztan          #+#    #+#                 */
-/*   Updated: 2020/08/24 16:55:56 by ztan          ########   odam.nl         */
+/*   Updated: 2020/09/10 21:33:21 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,18 @@ void		turn_char(t_data *data)
 
 void		detect_movement(t_data *data)
 {
-	data->input.horizontal =
-		(data->input.left > data->input.right) ? -1 : 1;
+	data->input.horizontal = (data->input.left > data->input.right) ? -1 : 1;
 	data->input.vertical =
 		(data->input.backward > data->input.forward) ? -1 : 1;
-	data->input.turn =
-		(data->input.turn_left > data->input.turn) ? -1 : 1;
+	data->input.turn = (data->input.turn_left > data->input.turn) ? -1 : 1;
 	if ((data->input.left && data->input.right) ||
 	(!data->input.left && !data->input.right))
 		data->input.horizontal = 0;
 	if ((data->input.forward && data->input.backward) ||
 	(!data->input.forward && !data->input.backward))
 		data->input.vertical = 0;
-	if ((!data->input.turn_left && !data->input.turn_right) ||
-	(data->input.turn_left && data->input.turn_right))
+	if ((data->input.turn_left && data->input.turn_right) ||
+	(!data->input.turn_left && !data->input.turn_right))
 		data->input.turn = 0;
 	if (data->input.horizontal || data->input.vertical)
 		move_char(data);

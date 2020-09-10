@@ -6,7 +6,7 @@
 /*   By: zenotan <zenotan@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/08/08 13:09:37 by zenotan       #+#    #+#                 */
-/*   Updated: 2020/09/09 13:37:42 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 19:14:13 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ static void	draw_bmp(t_data *data)
 						(y * data->img[data->frame].line_length + x *
 						(data->img[data->frame].bits_per_pixel / 8));
 			pixel = *(unsigned int *)pixel_addr;
-			write_val = write(data->bmp_fd, &pixel, 3);
-			if (write_val == -1)
+			if (write(data->bmp_fd, &pixel, 3) == -1)
 				errors("Failed to write to .bmp file", data);
 			x++;
 		}
-		write(data->bmp_fd, "/0/0/0", data->bmp_padding);
+		if (write(data->bmp_fd, "/0/0/0", data->bmp_padding) == -1)
+				errors("Failed to write to .bmp file", data);
 		y--;
 	}
 }

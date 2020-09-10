@@ -6,7 +6,7 @@
 /*   By: ztan <ztan@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/17 16:27:12 by ztan          #+#    #+#                 */
-/*   Updated: 2020/09/09 13:37:30 by zenotan       ########   odam.nl         */
+/*   Updated: 2020/09/10 19:08:36 by zenotan       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int				close_window(t_data *data)
 
 void			errors(char *str, t_data *data)
 {
-	write(2, "Error\n", 6);
-	write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
 	data->free = 0;
 	close_window(data);
 }
